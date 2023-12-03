@@ -15,10 +15,11 @@ import Header from './components/Header/Header';
 
 
 function App() {
+  let userLogged = false;
   return (
    
     <BrowserRouter >
-      <Header/>
+      <Header logged={userLogged} />
       <Routes  >
         <Route exact  path="" element={<Landing />} />
         <Route  path="*" element={<NotFound />} />

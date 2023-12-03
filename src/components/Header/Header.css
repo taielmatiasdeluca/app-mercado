@@ -1,19 +1,39 @@
 header{
     height: 80px;
     background-color:var(--light-green);
+    
     display: flex;
     align-items: center;
-    padding: 1rem;
+    justify-content: space-between;
+    padding: 1rem 10%;
     color:var(--white);
 
     & .logo{
         font-size: 22px;
+        color: var(--white);
+        text-decoration: underline;
     }
+
+    & .controls{
+        padding: 0 .5rem;
+        user-select: none;
+
+        & span{
+            cursor: pointer;
+            color:var(--white);
+            text-decoration: none;
+
+        }
+       
+    }
+
+   
 
     & .seacher{
         position: relative;
         display: flex;
         align-items: center;
+        width:50%;
 
         & input{
             all:unset;
@@ -22,15 +42,53 @@ header{
             padding:.5rem;
             width: 100%;
             font-size: 18px;
+            border:none;
+            box-sizing:none;
+        }
+
+        & input:focus{
+            border: 2px solid var(--green);
+            
         }
 
         & span{
             position:absolute;
             right: 5px;
-            color:var(--gray);
+            color:var(--light-gray);
             padding:0 5px;
             border-left: 1px solid var(--light-gray);
             cursor: pointer;
         }
+        & span:hover{
+            color:var(--gray);
+
+        }
+
+        & input::placeholder {
+            color: var(--light-gray);
+            opacity: 1; /* Firefox */
+        }
+        & input::-ms-input-placeholder{
+            color: var(--light-gray);
+
+        }
+       
     }
+}
+
+#carrito{
+    overflow: hidden;
+    background-color: aquamarine;
+    transition: .5s;
+    width:400px;
+    position: absolute;
+    right: 0;
+    height:calc(100% - 80px);
+
+    flex-direction: row-reverse ;
+    &.collapsed{
+        width:0px;
+
+    }
+
 }
