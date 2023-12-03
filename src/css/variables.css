@@ -1,0 +1,14 @@
+:root{
+    --light-green:#606c38;
+    --green:#283618;
+    --white:#fefae0;
+    --light-orange:#dda15e;
+    --orange:#bc6c25;
+    --gray:#495057;
+    --light-gray:#adb5bd;
+}
+
+@font-face {
+    font-family: normal;
+    src: url(../static/fonts/Rubik-Regular.ttf);
+}
