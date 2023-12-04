@@ -1,0 +1,45 @@
+#register{
+    display: flex;
+    height: calc(100vh - 80px);
+    justify-content: center;
+    align-items: center;
+
+    & form{
+        display:grid;
+        gap:.5rem;
+        background-color: var(--light-green);
+        padding:5%;
+        font-size: 18px;
+        border:none;
+        outline: none;
+        color:var(--white);
+
+        & input{
+            all:unset;
+            background-color: var(--white);
+            color:var(--gray);
+            padding:.5rem;
+        }
+        
+        & input:focus{
+            border:2px solid var(--green);
+        }
+
+        & h1{
+            text-align: center;
+        }
+
+        & input[type=submit]{
+            background-color: var(--green);
+            color:var(--white);
+            text-align: center;
+            cursor:pointer;
+        }
+
+        & a{
+            text-decoration: none;
+            color:var(--white);
+        }
+
+    }
+}

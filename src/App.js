@@ -12,6 +12,9 @@ import { useLocation } from "react-router-dom";
 import Landing from './components/Landing/Landing';
 import NotFound from './components/NotFound/NotFound';
 import Header from './components/Header/Header';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import Search from './components/Search/Search';
 
 
 function App() {
@@ -23,6 +26,9 @@ function App() {
       <Routes  >
         <Route exact  path="" element={<Landing />} />
         <Route  path="*" element={<NotFound />} />
+        <Route  path="/login" element={<Login logged={userLogged} />} />
+        <Route  path="/register" element={<Register logged={userLogged} />} />
+        <Route  path="/search" element={<Search/>} />
 
       </Routes>
     </BrowserRouter>
