@@ -1,0 +1,102 @@
+.new{
+    padding:1rem;
+
+    
+
+    & .title{
+        display:flex;
+        align-items: flex-end;
+        gap:1rem;
+
+        h1{
+            font-size: 40px;
+        }
+
+        & a{
+            color:var(--green);
+        }
+    }
+
+    & form{
+        display: block;
+        padding:1rem;
+
+        & span{
+            width:100%;
+        }
+    }
+}
+.datalist_container{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+
+   
+    & button{
+        all:unset;
+        position: absolute;
+        border:1px solid var(--green);
+        bottom: 0;
+        right: 0;
+        padding:6px 2rem;
+        display: flex;
+        
+    }
+    & button:hover{
+        background-color: var(--green);
+        color:var(--white);
+    }
+}
+
+h2{
+    font-size: 30px;
+    
+}
+
+.buttonA{
+    padding-left: 1rem;
+}
+
+.details{
+    padding:1rem;
+}
+
+.item{
+    width: 40%;
+
+    & label{
+        font-size: 22px;
+        padding:.5rem 0;
+        display:flex;
+        gap: .5rem;
+    }
+    & input,textarea{
+        all:unset;
+        box-sizing: border-box;
+        font-size: 18px;
+        padding: 5px;
+        width:100%;
+        border:1px solid var(--green);
+    }
+    & input:focus,textarea:focus{
+        outline:2px solid var(--green);
+    }
+    
+      
+    
+}
+
+@media (max-width: 800px) {
+    .item{
+        width:100%;
+    }
+}
+
+
+#modal{
+    background-color: pink;
+    height:500px;
+    width:70%;
+    position: absolute;
+    left: 15%;
+}

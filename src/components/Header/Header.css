@@ -9,7 +9,7 @@ header{
     color:var(--white);
 
     & .logo{
-        font-size: 22px;
+        height:40px;
         color: var(--white);
         text-decoration: underline;
     }
@@ -61,7 +61,14 @@ header{
             padding:0 5px;
             border-left: 1px solid var(--light-gray);
             cursor: pointer;
+
+            @media (max-width: 600px) {
+                display: none;
+            }
+            
         }
+       
+
         & span:hover{
             color:var(--gray);
 

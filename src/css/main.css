@@ -11,3 +11,51 @@ body,html,#root{
     min-height: 100vh;
 }
 
+.collapsed{
+    width:0px;
+    
+
+}
+
+
+.modalHidden{
+    display:none;
+}
+
+.buttonA{
+    cursor: pointer;
+    user-select: none;
+    &:hover{
+        opacity: 70%;
+        text-decoration: underline;
+    }
+
+}
+
+.button{
+    cursor: pointer;
+    user-select: none;
+}
+
+.datalist{
+    
+    font-size: 18px;
+    & label{
+        display: flex;
+        padding-bottom:.5rem;
+        font-size: 22px;
+
+    }
+
+    & input{
+        font-size: 18px;
+        padding-left: .5rem;
+
+    }
+
+    & input:focus{
+        outline: 2px solid var(--green);
+    }
+}
+
+

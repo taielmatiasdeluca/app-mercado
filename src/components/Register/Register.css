@@ -1,4 +1,4 @@
-#register{
+.section{
     display: flex;
     height: calc(100vh - 80px);
     justify-content: center;
@@ -29,11 +29,28 @@
             text-align: center;
         }
 
-        & input[type=submit]{
+        & .error{
+            color:var(--red);
+        }
+
+        & .success{
+            color: var(--green);
+        }
+
+        & .formButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:35px;
             background-color: var(--green);
             color:var(--white);
             text-align: center;
             cursor:pointer;
+            padding:.1rem;
+
+            & .loading{
+                height:inherit;
+            }
         }
 
         & a{

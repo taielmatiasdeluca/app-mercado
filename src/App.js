@@ -15,20 +15,31 @@ import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Search from './components/Search/Search';
-
+import Activate from './components/Activate/Activate';
+import Block from './components/Block/Block';
+import New from './components/New/New';
 
 function App() {
   let userLogged = false;
+
+  
   return (
    
     <BrowserRouter >
-      <Header logged={userLogged} />
+      <Header  />
       <Routes  >
         <Route exact  path="" element={<Landing />} />
+
         <Route  path="*" element={<NotFound />} />
-        <Route  path="/login" element={<Login logged={userLogged} />} />
-        <Route  path="/register" element={<Register logged={userLogged} />} />
+        <Route  path="/activate/*" element={<Activate/>} />
+        <Route  path="/block/*" element={<Block/>} />
+
+        <Route  path="/login" element={<Login  />} />
+        <Route  path="/register" element={<Register  />} />
         <Route  path="/search" element={<Search/>} />
+        <Route  path="/new" element={<New/>} />
+        
+        
 
       </Routes>
     </BrowserRouter>
