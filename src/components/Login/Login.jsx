@@ -27,8 +27,8 @@ function Login(props){
 
    
 
-    const handleForm = async (e)=>{
-        e.preventDefault();
+    const handleForm = async ()=>{
+        console.log('hola')
         const data = new FormData(document.getElementById('main__form'));
         const email = data.get('email');
         
@@ -57,17 +57,20 @@ function Login(props){
         }
         setLoading(false);
 
-        
-        
+    
+    }
 
-
-
-        
-
+    function checkEnter(event){
+        if(event.code === 'Enter'){
+            handleForm();
+        }
     }
     return (
         <div id="login" className='section'>
-            <form id='main__form' onSubmit={handleForm}>
+            <form id='main__form' onSubmit={(e)=>{
+                e.preventDefault()
+                handleForm();
+                }}>
                 <h1>Iniciar Sesion</h1>
                 
                 <div className="success">
@@ -86,10 +89,10 @@ function Login(props){
                 </div>
 
                 <label htmlFor="email">Email</label>
-                <input type="text" name='email' placeholder='Ingrese Email'/>
+                <input type="text" name='email' onKeyUp={checkEnter}placeholder='Ingrese Email'/>
 
                 <label htmlFor="password">Contraseña</label>
-                <input type="password" name='password' placeholder='Ingrese Contraseña'/>
+                <input type="password" name='password' onKeyUp={checkEnter} placeholder='Ingrese Contraseña'/>
 
                 <a onClick={handleForm} className='formButton'>
                     {loading && (

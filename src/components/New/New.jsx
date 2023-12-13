@@ -14,15 +14,17 @@ function New() {
   const [openModal, setOpenModal] = useState(false);
   const [information,setInformation] = useState([]);
   const [DLValue,setDLValue] = useState('');
+  const [producto,setProducto] = useState('');
 
-  let  {data:caracteristicas} = useFetch("http://ecommerce.taieldeluca.com.ar/api/info/get")
- 
+  let {data:productos} = useFetch("https://ecommerce.taieldeluca.com.ar/api/product/get")
+  let  {data:caracteristicas} = useFetch("https://ecommerce.taieldeluca.com.ar/api/info/get")
+  
   function handleItem(e){
     const newData = {id:e.id,name:e.value}
-    
-    if(information.find(item => item.id == newData.id)){
+    console.log(information)
+    console.log(newData)
+    if(information.find(item => item.name == newData.name)){
       console.log('capo');
-
       NotificationManager.error('Esa caracteristica ya ha sido ingresada', 'Error', 5000, () => {
       
       });
@@ -35,18 +37,29 @@ function New() {
   async function handleForm (event){
     event.preventDefault();
     const data = new FormData(document.getElementById('main__form'));
-    const response = await fetch('http://ecommerce.taieldeluca.com.ar/api/publicacion/create',
+    const files =  document.getElementById('fileInput').files;
+    for (let i = 0; i < files.length; i++) {
+      data.append(files[i].name,files[i]);      
+    }
+    if(producto == ''){
+      setProducto(document.getElementById('hidden__product').value)
+    }
+    
+    const response = await fetch('https://ecommerce.taieldeluca.com.ar/api/publicacion/create',
     {
       method:'post',
-        body:data
-      });
-    const info = await response.json();
-    console.log(info)
+      body:data,
+
+    });
+    console.log(await response.text())
+      //const info = await response.json();
+   
   }
 
   return (
       <>
       <NotificationContainer></NotificationContainer>
+      
       <AnimateOnChange>
         <div id="modal" className={!openModal && "modalHidden"}>
           <div id="closer" className="button">
@@ -68,9 +81,24 @@ function New() {
       <div className="details">
         
 
-        <form onSubmit={handleForm} id='main__form' > 
-          
+        <form onSubmit={handleForm} id='main__form' encType="multipart/form-data" > 
+          <div className="item datalist_container">
+            <input type="hidden" name="producto" id='hidden__product' value={producto}/>
 
+            {productos && (
+              <DatalistInput
+                placeholder="Buscar entre productos ya ingresados"
+                label="Producto"
+                className='datalist'
+                onSelect={(item) => {
+                  setProducto(item.id);
+                }}
+                items={productos.map(item=>{
+                  return {id:item.id,value:item.nombre}
+                })}
+              />
+            )}
+          </div>
 
           <div className="item">
             <label htmlFor="">
@@ -84,12 +112,18 @@ function New() {
             </label>
             <textarea name="descripcion" id="" cols="30" rows="10"></textarea>
           </div>
+          <div className="item">
+            <label htmlFor="">
+              Imagen
+            </label>
+            <input type="file" name="imagen" accept="image/*"  multiple id="fileInput" />
+          </div>
+
 
           <div className="subtitle">
             <h2>
               Datos del producto
             </h2>
-            <a className='buttonA' onClick={() => setOpenModal(!openModal)} >¡Buscar entre productos ya cargados!</a>
           </div>
         
 
@@ -102,14 +136,13 @@ function New() {
                 className='datalist'
                 value={DLValue}
                 
-
-                
-                
-                
+                onChange={(e)=>{
+                  setDLValue(e.target.value);
+                }}
                 onSelect={(item) => {
-                  handleItem(item)
-                  setDLValue('');
-                  console.log(DLValue)
+                  handleItem(item);
+                  setDLValue(item.value);
+                
                   
                 
                   
@@ -120,14 +153,30 @@ function New() {
                 })}
               />
             )}
-            <button>Agregar</button>
+            <button onClick={(event)=>{
+              event.preventDefault();
+              handleItem({id:DLValue,value:DLValue})
+              }}>Agregar</button>
           </div>
 
           <AnimateOnChange animation="slideIn" >
             {information.map(item=>{
                 return <div key={item.id} className="item">
-                    <label htmlFor="">{item.name}</label>
-                    <input type="text" name={item.name} id=""  />
+                  
+                    <label htmlFor="">
+                      {item.name}
+                      <span onClick={()=>{
+                        setInformation(information.filter(((i)=>i.name != item.name)));
+                      }} className="minus_item material-symbols-outlined">
+                        remove
+                      </span>
+                    </label>
+                    {item.id && (
+                      <input type="text" name={item.id} id=""  />
+                    )}
+                    {!item.id && (
+                            <input type="text" name={item.name} id=""  />
+                    )}
 
 
                   </div>

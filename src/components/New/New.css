@@ -29,6 +29,7 @@
             width:100%;
 
         }
+        
     }
 }
 .datalist_container{
@@ -74,6 +75,13 @@ h2{
     }
 }
 
+.minus_item{
+    color:var(--red);
+}
+.minus_item{
+    opacity: 80%;
+}
+
 
 
 
@@ -107,6 +115,35 @@ h2{
     & input:focus,textarea:focus{
         outline:2px solid var(--green);
     }
+
+    & input[type=file] {
+        all:unset;
+        border:1px solid var(--green);
+        display:flex;
+        width:100%;
+        
+        
+        &::file-selector-button {
+            all:unset;
+            background-color: var(--green);
+            color:var(--white);
+            padding:.5rem;
+            margin-right: 1rem;
+            
+        }
+
+        &:focus{
+            outline:2px solid var(--green);
+
+        }
+
+        &:hover{
+            &::file-selector-button {
+                background-color: var(--light-green);
+            }
+        }
+        
+    }
     
       
     
@@ -115,6 +152,7 @@ h2{
 @media (max-width: 800px) {
     .item{
         width:100%;
+
     }
 }
 
