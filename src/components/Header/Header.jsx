@@ -22,6 +22,11 @@ function Header(props) {
         console.log(data);
         navigate('/login')
     }
+
+    if(!localStorage.getItem('logged')){
+        localStorage.setItem("logged", false);
+
+    }
     
 
     const [cart,openCart] = useState('collapsed');
@@ -71,9 +76,7 @@ function Header(props) {
                     </Link>
                     
                 )}
-                <span className="material-symbols-outlined" data-tooltip-id="tooltip_header" data-tooltip-content="Carrito" onClick={()=>{toggleCart()}
-                    
-                }>
+                <span className="material-symbols-outlined" data-tooltip-id="tooltip_header" data-tooltip-content="Carrito" onClick={()=>{toggleCart()}}>
                     shopping_cart
                 </span>
                 {(localStorage.getItem("logged") == 'true') && (

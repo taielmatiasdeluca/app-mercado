@@ -32,6 +32,18 @@ function New() {
     }
   }
 
+  async function handleForm (event){
+    event.preventDefault();
+    const data = new FormData(document.getElementById('main__form'));
+    const response = await fetch('http://ecommerce.taieldeluca.com.ar/api/publicacion/create',
+    {
+      method:'post',
+        body:data
+      });
+    const info = await response.json();
+    console.log(info)
+  }
+
   return (
       <>
       <NotificationContainer></NotificationContainer>
@@ -54,13 +66,12 @@ function New() {
       
      
       <div className="details">
-        <h2>
-          Datos del producto
-        </h2>
-        <a className='buttonA' onClick={() => setOpenModal(!openModal)} >¡Buscar entre productos ya cargados!</a>
+        
+
+        <form onSubmit={handleForm} id='main__form' > 
+          
 
 
-        <form onSubmit={(e)=>{e.preventDefault();}} >   
           <div className="item">
             <label htmlFor="">
               Titulo
@@ -73,12 +84,16 @@ function New() {
             </label>
             <textarea name="descripcion" id="" cols="30" rows="10"></textarea>
           </div>
-        </form>
 
+          <div className="subtitle">
+            <h2>
+              Datos del producto
+            </h2>
+            <a className='buttonA' onClick={() => setOpenModal(!openModal)} >¡Buscar entre productos ya cargados!</a>
+          </div>
         
-        <h2>Mas Datos</h2>
+
       
-        <form onSubmit={(e)=>{e.preventDefault();}} className="information">
           <div className="item datalist_container">
             {caracteristicas && (
               <DatalistInput
@@ -112,12 +127,17 @@ function New() {
             {information.map(item=>{
                 return <div key={item.id} className="item">
                     <label htmlFor="">{item.name}</label>
-                    <input type="text" name="" id=""  />
+                    <input type="text" name={item.name} id=""  />
 
 
                   </div>
             })}
           </AnimateOnChange>
+          
+          <button className='submit_button' type="submit">
+            Publicar
+          </button>
+
         </form>
       
 
