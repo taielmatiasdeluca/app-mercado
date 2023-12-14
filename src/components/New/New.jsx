@@ -6,9 +6,10 @@ import 'react-datalist-input/dist/styles.css';
 import {useFetch} from '../hooks/useFetch';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-
+import { useNavigate } from 'react-router-dom';
 
 function New() {
+  const navigate = useNavigate();
 
  
   const [openModal, setOpenModal] = useState(false);
@@ -21,13 +22,8 @@ function New() {
   
   function handleItem(e){
     const newData = {id:e.id,name:e.value}
-    console.log(information)
-    console.log(newData)
     if(information.find(item => item.name == newData.name)){
-      console.log('capo');
-      NotificationManager.error('Esa caracteristica ya ha sido ingresada', 'Error', 5000, () => {
-      
-      });
+      NotificationManager.error('Esa caracteristica ya ha sido ingresada', 'Error', 5000, () => {});
     }
     else{
       setInformation([...information,newData])
@@ -41,9 +37,6 @@ function New() {
     for (let i = 0; i < files.length; i++) {
       data.append(files[i].name,files[i]);      
     }
-    if(producto == ''){
-      setProducto(document.getElementById('hidden__product').value)
-    }
     
     const response = await fetch('https://ecommerce.taieldeluca.com.ar/api/publicacion/create',
     {
@@ -51,8 +44,13 @@ function New() {
       body:data,
 
     });
-    console.log(await response.text())
-      //const info = await response.json();
+    const info = await response.json();
+    if(info.errno == 400){
+      navigate('/');
+    }
+    else{
+      NotificationManager.error(info.error, 'Error', 5000, () => {})
+    }
    
   }
 
@@ -90,9 +88,8 @@ function New() {
                 placeholder="Buscar entre productos ya ingresados"
                 label="Producto"
                 className='datalist'
-                onSelect={(item) => {
-                  setProducto(item.id);
-                }}
+                onSelect={(item) => {}}
+                onChange={(e)=>{setProducto(e.target.value)}}
                 items={productos.map(item=>{
                   return {id:item.id,value:item.nombre}
                 })}
